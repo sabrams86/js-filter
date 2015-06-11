@@ -7,4 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express', cabinList: cabin });
 });
 
+router.get('/cabins.json', function(req, res, next){
+  res.json(object);
+});
 module.exports = router;

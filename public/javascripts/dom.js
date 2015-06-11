@@ -16,3 +16,36 @@ var background3 = document.getElementsByClassName('background3')[0];
 background3.addEventListener('click', function(){
   document.body.style.backgroundImage = "url('/images/background3.jpg')";
 });
+
+var sortHigh = document.getElementsByClassName('high')[0];
+var sortLow = document.getElementsByClassName('low')[0];
+sortHigh.addEventListener('click', function(){
+
+  var xhr = new XMLHttpRequest;
+  xhr.open('get', '/cabins.json');
+  xhr.addEventListener('load', function(){
+    var results = JSON.parse(xhr.response);
+    console.log(results);
+    event.preventDefault();
+  });
+  xhr.send();
+});
+
+
+sortLow.addEventListener('click', function(){
+  event.preventDefault();
+  var list = document.getElementsByClassName('listing')
+  console.log(list);
+});
+
+var compare = function(a,b){
+  aPrice = a.getAttribute('name')
+  bPrice = b.getAttribute('name')
+  if (aPrice > bPrice){
+    return 1;
+  } else if (aPrice < bPrice){
+    return -1;
+  } else {
+    return 0;
+  }
+}

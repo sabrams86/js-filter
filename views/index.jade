@@ -37,13 +37,13 @@ block content
       div.results
         div.sort-menu
           span Sort By:  
-            a(href="#") High
+            a.high(href="#") High
             span  |  
-            a(href="#") Low
+            a.low(href="#") Low
         div.listings
           each listing in cabinList
             a(href='#')
-              div.listing
+              div.listing(name='#{listing.price}')
                 img.thumbnail(src='#{listing.imgUrl}' alt='cabin')
                 p $#{listing.price}
               
