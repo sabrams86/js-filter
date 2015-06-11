@@ -42,7 +42,8 @@ block content
             a(href="#") Low
         div.listings
           each listing in cabinList
-            div.listing
-              img.thumbnail(src='#{listing.imgUrl}')
-              p $#{listing.price}
+            a(href='#')
+              div.listing
+                img.thumbnail(src='#{listing.imgUrl}' alt='cabin')
+                p $#{listing.price}
               
