@@ -67,3 +67,30 @@ a {
   height: 40px;
   text-align: left;
 }
+.background-changer{
+  float: right;
+  height: 35px;
+  width:110px;
+  background-color: #f7f1d5;
+  opacity: .90;
+  box-shadow: 5px 5px 5px grey;
+  border-style: ridge;
+  border-radius: 5px;
+  padding: 5px;
+}
+.background{
+  display: inline-block;
+  width:30px;
+  height: 30px;
+  border-radius: 30px;
+  border-style: ridge;
+}
+.background1{
+  background-color: tan;
+}
+.background2{
+  background-color: grey;
+}
+.background3{
+  background-color: maroon;
+}
