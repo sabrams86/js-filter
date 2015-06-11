@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  div.background-changer
+    
+  div.container
+    h1.heading Cabins For Sale
+    div.main
+      div.filter-menu
+        ul.price-list
+          li
+            label
+              input(type='checkbox', name='0-50')
+              $0 - $50K
+          li
+            label
+              input(type='checkbox', name='50-100')
+              $50K - $100K
+          li
+            label
+              input(type='checkbox', name='50-100')
+              $100K - $200K
+          li
+            label
+              input(type='checkbox', name='50-100')
+              $200K - $300K
+          li
+            label
+              input(type='checkbox', name='300-500')
+              $300K - $500K
+          li
+            label
+              input(type='checkbox', name='500+')
+              $500K - $1 Mil
+      div.results
+        div.sort-menu
+          span Sort By:  
+            a(href="#") High
+            span  |  
+            a(href="#") Low
+        
