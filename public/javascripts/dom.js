@@ -24,23 +24,78 @@ sortHigh.addEventListener('click', function(){
   var xhr = new XMLHttpRequest;
   xhr.open('get', '/cabins.json');
   xhr.addEventListener('load', function(){
-    var results = JSON.parse(xhr.response);
-    console.log(results);
     event.preventDefault();
+    var results = JSON.parse(xhr.response).cabins;
+    results = results.sort(compareMore)
+    var listings = document.getElementsByClassName('listings')[0];
+    listings.innerHTML = null;
+    results.forEach(function(e,i){
+      var a = document.createElement('a');
+      var div = document.createElement('div');
+      var p = document.createElement('p');
+      var img = document.createElement('img');
+      a.href='#';
+      div.className = 'listing';
+      div.name = e.price;
+      img.src = e.imgUrl;
+      img.alt = 'cabin';
+      img.className = 'thumbnail';
+      p.innerHTML = '$'+e.price
+      a.appendChild(div);
+      div.appendChild(img);
+      div.appendChild(p);
+      listings.appendChild(a);
+    });
   });
   xhr.send();
 });
 
 
 sortLow.addEventListener('click', function(){
-  event.preventDefault();
-  var list = document.getElementsByClassName('listing')
-  console.log(list);
+  var xhr = new XMLHttpRequest;
+  xhr.open('get', '/cabins.json');
+  xhr.addEventListener('load', function(){
+    event.preventDefault();
+    var results = JSON.parse(xhr.response).cabins;
+    results = results.sort(compareLess)
+    var listings = document.getElementsByClassName('listings')[0];
+    listings.innerHTML = null;
+    results.forEach(function(e,i){
+      var a = document.createElement('a');
+      var div = document.createElement('div');
+      var p = document.createElement('p');
+      var img = document.createElement('img');
+      a.href='#';
+      div.className = 'listing';
+      div.name = e.price;
+      img.src = e.imgUrl;
+      img.alt = 'cabin';
+      img.className = 'thumbnail';
+      p.innerHTML = '$'+e.price
+      a.appendChild(div);
+      div.appendChild(img);
+      div.appendChild(p);
+      listings.appendChild(a);
+    });
+  });
+  xhr.send();
 });
 
-var compare = function(a,b){
-  aPrice = a.getAttribute('name')
-  bPrice = b.getAttribute('name')
+var compareMore = function(a,b){
+  aPrice = a.price;
+  bPrice = b.price;
+  if (aPrice < bPrice){
+    return 1;
+  } else if (aPrice > bPrice){
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+var compareLess = function(a,b){
+  aPrice = a.price;
+  bPrice = b.price;
   if (aPrice > bPrice){
     return 1;
   } else if (aPrice < bPrice){
