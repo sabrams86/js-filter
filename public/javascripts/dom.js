@@ -20,126 +20,20 @@ background3.addEventListener('click', function(){
 var sortHigh = document.getElementsByClassName('high')[0];
 var sortLow = document.getElementsByClassName('low')[0];
 sortHigh.addEventListener('click', function(){
-
-  var xhr = new XMLHttpRequest;
-  xhr.open('get', '/cabins.json');
-  xhr.addEventListener('load', function(){
-    event.preventDefault();
-    var results = JSON.parse(xhr.response).cabins;
-    results = results.sort(compareMore)
-    var listings = document.getElementsByClassName('listings')[0];
-    listings.innerHTML = null;
-    results.forEach(function(e,i){
-      var a = document.createElement('a');
-      var div = document.createElement('div');
-      var p = document.createElement('p');
-      var img = document.createElement('img');
-      a.href='#';
-      div.className = 'listing';
-      div.name = e.price;
-      img.src = e.imgUrl;
-      img.alt = 'cabin';
-      img.className = 'thumbnail';
-      p.innerHTML = '$'+e.price
-      a.appendChild(div);
-      div.appendChild(img);
-      div.appendChild(p);
-      listings.appendChild(a);
-    });
-  });
-  xhr.send();
+  dataRequest(sortMore)
 });
-
 
 sortLow.addEventListener('click', function(){
-  var xhr = new XMLHttpRequest;
-  xhr.open('get', '/cabins.json');
-  xhr.addEventListener('load', function(){
-    event.preventDefault();
-    var results = JSON.parse(xhr.response).cabins;
-    results = results.sort(compareLess)
-    var listings = document.getElementsByClassName('listings')[0];
-    listings.innerHTML = null;
-    results.forEach(function(e,i){
-      var a = document.createElement('a');
-      var div = document.createElement('div');
-      var p = document.createElement('p');
-      var img = document.createElement('img');
-      a.href='#';
-      div.className = 'listing';
-      div.name = e.price;
-      img.src = e.imgUrl;
-      img.alt = 'cabin';
-      img.className = 'thumbnail';
-      p.innerHTML = '$'+e.price
-      a.appendChild(div);
-      div.appendChild(img);
-      div.appendChild(p);
-      listings.appendChild(a);
-    });
-  });
-  xhr.send();
+  dataRequest(sortLess);
 });
 
+var checkCount1 = 0;
 var check1 = document.getElementsByName('0-50')[0];
-check1.addEventListener('click', function(){
-  var xhr = new XMLHttpRequest;
-  xhr.open('get', '/cabins.json');
-  xhr.addEventListener('load', function(){
-    event.preventDefault();
-    var results = JSON.parse(xhr.response).cabins;
-    results = results.filter(priceFilter)
-    var listings = document.getElementsByClassName('listings')[0];
-    listings.innerHTML = null;
-    results.forEach(function(e,i){
-      var a = document.createElement('a');
-      var div = document.createElement('div');
-      var p = document.createElement('p');
-      var img = document.createElement('img');
-      a.href='#';
-      div.className = 'listing';
-      div.name = e.price;
-      img.src = e.imgUrl;
-      img.alt = 'cabin';
-      img.className = 'thumbnail';
-      p.innerHTML = '$'+e.price
-      a.appendChild(div);
-      div.appendChild(img);
-      div.appendChild(p);
-      listings.appendChild(a);
-    });
-  });
-  xhr.send();
+check1.addEventListener('change', function(){
+  checkCount1 +=1;
+  if (checkCount1 % 2 === 1){
+    dataRequest(filterIt);
+  } else {
+    dataRequest();
+}
 });
-
-
-
-
-var priceFilter = function(item){
-  if (item.price < 100000)
-  return item;
-}
-
-var compareMore = function(a,b){
-  aPrice = a.price;
-  bPrice = b.price;
-  if (aPrice < bPrice){
-    return 1;
-  } else if (aPrice > bPrice){
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
-var compareLess = function(a,b){
-  aPrice = a.price;
-  bPrice = b.price;
-  if (aPrice > bPrice){
-    return 1;
-  } else if (aPrice < bPrice){
-    return -1;
-  } else {
-    return 0;
-  }
-}
