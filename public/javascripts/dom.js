@@ -81,6 +81,45 @@ sortLow.addEventListener('click', function(){
   xhr.send();
 });
 
+var check1 = document.getElementsByName('0-50')[0];
+check1.addEventListener('click', function(){
+  var xhr = new XMLHttpRequest;
+  xhr.open('get', '/cabins.json');
+  xhr.addEventListener('load', function(){
+    event.preventDefault();
+    var results = JSON.parse(xhr.response).cabins;
+    results = results.filter(priceFilter)
+    var listings = document.getElementsByClassName('listings')[0];
+    listings.innerHTML = null;
+    results.forEach(function(e,i){
+      var a = document.createElement('a');
+      var div = document.createElement('div');
+      var p = document.createElement('p');
+      var img = document.createElement('img');
+      a.href='#';
+      div.className = 'listing';
+      div.name = e.price;
+      img.src = e.imgUrl;
+      img.alt = 'cabin';
+      img.className = 'thumbnail';
+      p.innerHTML = '$'+e.price
+      a.appendChild(div);
+      div.appendChild(img);
+      div.appendChild(p);
+      listings.appendChild(a);
+    });
+  });
+  xhr.send();
+});
+
+
+
+
+var priceFilter = function(item){
+  if (item.price < 100000)
+  return item;
+}
+
 var compareMore = function(a,b){
   aPrice = a.price;
   bPrice = b.price;
