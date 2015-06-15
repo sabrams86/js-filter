@@ -37,3 +37,15 @@ check1.addEventListener('change', function(){
     dataRequest();
 }
 });
+
+
+
+/* state machine
+
+track each toggleable item with a global variable that changesit from false to true, then
+on each eventListener fire a function that takes all of those variables as inputs and performs a filter
+based on the combination
+
+masterFilter = function(check1 ,check2, check3, check4, check5, low, high)
+
+*/
