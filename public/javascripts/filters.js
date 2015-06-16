@@ -28,11 +28,8 @@ var dataRequest = function(callback){
       listings.appendChild(a);
     });
   });
-  xhr.send();
-}
-
-var buildQuery = function(){
-
+  var test = document.getElementsByName('test')[0].value;
+  xhr.send({stuff: 'text='+test});
 }
 
 var priceFilter = function(item){

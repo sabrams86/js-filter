@@ -8,6 +8,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/cabins.json', function(req, res, next){
+  var blah = req.params.stuff;
+  console.log(blah);
   res.json(object);
 });
+
+router.post('/cabins.json', function(req, res, next){
+  check1 = req.body.check1;
+  check2 = req.body.check2;
+  check3 = req.body.check3;
+  check4 = req.body.check4;
+  text = req.body.test;
+  console.log(check11, '------',check2, '--------', text);
+  res.json(object);
+});
+
 module.exports = router;

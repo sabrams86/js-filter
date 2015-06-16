@@ -28,8 +28,8 @@ sortLow.addEventListener('click', function(){
 });
 
 var checkCount1 = 0;
-var check1 = document.getElementsByName('0-50')[0];
-check1.addEventListener('change', function(){
+var checkmark = document.getElementsByName('check1')[0];
+checkmark.addEventListener('change', function(){
   checkCount1 +=1;
   if (checkCount1 % 2 === 1){
     dataRequest(filterIt);
