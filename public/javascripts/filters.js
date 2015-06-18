@@ -1,10 +1,20 @@
 var dataRequest = function(callback){
   event.preventDefault();
   var xhr = new XMLHttpRequest;
-  xhr.open('get', '/cabins.json');
+
+  var queryArray = [];
+  var checkmarks = document.getElementsByClassName('checkmark');
+  for ( var i = 0; i < checkmarks.length; i++){
+    if (checkmarks[i].checked === true){
+      queryArray.push(checkmarks[i].name+'=true');
+    }
+  }
+  var queryString = queryArray.join('&');
+  
+  xhr.open('get', '/cabins.json?'+queryString);
   xhr.addEventListener('load', function(){
     event.preventDefault();
-    var results = JSON.parse(xhr.response).cabins;
+    var results = JSON.parse(xhr.response);
     if(callback){
       results = callback(results);
     }
@@ -28,8 +38,7 @@ var dataRequest = function(callback){
       listings.appendChild(a);
     });
   });
-  var test = document.getElementsByName('test')[0].value;
-  xhr.send({stuff: 'text='+test});
+  xhr.send();
 }
 
 var priceFilter = function(item){
