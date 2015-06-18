@@ -1,4 +1,4 @@
-var dataRequest = function(){
+var dataRequest = function(order){
   event.preventDefault();
   var xhr = new XMLHttpRequest;
 
@@ -8,6 +8,9 @@ var dataRequest = function(){
     if (checkmarks[i].checked === true){
       queryArray.push(checkmarks[i].name+'=true');
     }
+  }
+  if (order) {
+    queryArray.push('order='+order);
   }
   var queryString = queryArray.join('&');
 

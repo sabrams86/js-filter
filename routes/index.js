@@ -11,8 +11,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/cabins.json', function(req, res, next){
+  var sortOrder = 1;
+  if (req.query.order === 'asc'){
+    sortOrder = 1;
+  } else if (req.query.order === 'desc'){
+    sortOrder = -1;
+  }
+
   if (req.query.check1 != 'true' && req.query.check2 != 'true' && req.query.check3 != 'true' && req.query.check4 != 'true' && req.query.check5 != 'true' && req.query.check6 != 'true'){
-    collection.find({}, function(e, docs){
+    collection.find({}, {sort:{price: sortOrder}}, function(e, docs){
       res.json(docs);
     });
   } else {
@@ -65,7 +72,7 @@ router.get('/cabins.json', function(req, res, next){
       { price: { $gt : low4, $lt : high4 } },
       { price: { $gt : low5, $lt : high5 } },
       { price: { $gt : low6, $lt : high6 } }
-      ] }, function(e, docs){
+      ] }, {sort:{price: sortOrder}}, function(e, docs){
         res.json(docs);
     });
   }
