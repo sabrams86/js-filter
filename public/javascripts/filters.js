@@ -1,4 +1,4 @@
-var dataRequest = function(callback){
+var dataRequest = function(){
   event.preventDefault();
   var xhr = new XMLHttpRequest;
 
@@ -10,14 +10,11 @@ var dataRequest = function(callback){
     }
   }
   var queryString = queryArray.join('&');
-  
+
   xhr.open('get', '/cabins.json?'+queryString);
   xhr.addEventListener('load', function(){
     event.preventDefault();
     var results = JSON.parse(xhr.response);
-    if(callback){
-      results = callback(results);
-    }
     var listings = document.getElementsByClassName('listings')[0];
     listings.innerHTML = null;
     results.forEach(function(e,i){
@@ -40,44 +37,44 @@ var dataRequest = function(callback){
   });
   xhr.send();
 }
-
-var priceFilter = function(item){
-  if (item.price < 100000)
-  return item;
-}
-
-var filterIt = function(input){
-  return input.filter(priceFilter);
-}
-
-var sortLess = function(input){
-  return input.sort(compareLess);
-}
-
-var sortMore = function(input){
-  return input.sort(compareMore);
-}
-
-var compareMore = function(a,b){
-  aPrice = a.price;
-  bPrice = b.price;
-  if (aPrice < bPrice){
-    return 1;
-  } else if (aPrice > bPrice){
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
-var compareLess = function(a,b){
-  aPrice = a.price;
-  bPrice = b.price;
-  if (aPrice > bPrice){
-    return 1;
-  } else if (aPrice < bPrice){
-    return -1;
-  } else {
-    return 0;
-  }
-}
+//
+// var priceFilter = function(item){
+//   if (item.price < 100000)
+//   return item;
+// }
+//
+// var filterIt = function(input){
+//   return input.filter(priceFilter);
+// }
+//
+// var sortLess = function(input){
+//   return input.sort(compareLess);
+// }
+//
+// var sortMore = function(input){
+//   return input.sort(compareMore);
+// }
+//
+// var compareMore = function(a,b){
+//   aPrice = a.price;
+//   bPrice = b.price;
+//   if (aPrice < bPrice){
+//     return 1;
+//   } else if (aPrice > bPrice){
+//     return -1;
+//   } else {
+//     return 0;
+//   }
+// }
+//
+// var compareLess = function(a,b){
+//   aPrice = a.price;
+//   bPrice = b.price;
+//   if (aPrice > bPrice){
+//     return 1;
+//   } else if (aPrice < bPrice){
+//     return -1;
+//   } else {
+//     return 0;
+//   }
+// }

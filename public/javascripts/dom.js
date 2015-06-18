@@ -15,7 +15,6 @@ sortLow.addEventListener('click', function(){
   dataRequest(sortLess);
 });
 
-var checkCount1 = 0;
 var checkmark = document.getElementsByClassName('checkmark');
 for(var i = 0; i<checkmark.length; i++){
   checkmark[i].addEventListener('change', function(){
