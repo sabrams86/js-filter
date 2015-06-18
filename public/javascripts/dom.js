@@ -7,17 +7,20 @@ for (var i = 0; i < backgrounds.length; i++){
 var sortHigh = document.getElementsByClassName('high')[0];
 var sortLow = document.getElementsByClassName('low')[0];
 
+var sortValue = 'asc';
 sortHigh.addEventListener('click', function(){
-  dataRequest('desc');
+  sortValue = 'desc';
+  dataRequest(sortValue);
 });
 
 sortLow.addEventListener('click', function(){
-  dataRequest('asc');
+  sortValue='asc';
+  dataRequest(sortValue);
 });
 
 var checkmark = document.getElementsByClassName('checkmark');
 for(var i = 0; i<checkmark.length; i++){
   checkmark[i].addEventListener('change', function(){
-    dataRequest();
+    dataRequest(sortValue);
   });
 }
