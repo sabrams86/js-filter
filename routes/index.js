@@ -10,19 +10,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* Process JSON Data */
 router.get('/cabins.json', function(req, res, next){
+  //set initial sort order (could eventually be any default sort such as most popular, etc)
   var sortOrder = 1;
   if (req.query.order === 'asc'){
     sortOrder = 1;
   } else if (req.query.order === 'desc'){
     sortOrder = -1;
   }
-
+  // if no checkboxes are checked, return all documents in the collection
   if (req.query.check1 != 'true' && req.query.check2 != 'true' && req.query.check3 != 'true' && req.query.check4 != 'true' && req.query.check5 != 'true' && req.query.check6 != 'true'){
     collection.find({}, {sort:{price: sortOrder}}, function(e, docs){
       res.json(docs);
     });
   } else {
+    //check which checkmarks are checked via the queryString and assign values to be used in the DB query
     if (req.query.check1 === 'true'){
       var high1 = 50001;
       var low1 = 0;
@@ -65,6 +68,7 @@ router.get('/cabins.json', function(req, res, next){
       var high6 = 0;
       var low6 = 0;
     }
+    //for each checkmark checked find all documents within that price range. 
     collection.find( { $or: [
       { price: { $gt : low1, $lt : high1 } },
       { price: { $gt : low2, $lt : high2 } },

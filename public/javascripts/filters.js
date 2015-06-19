@@ -1,7 +1,11 @@
+//********************************
+//****   Main XHR Request ********
+//********************************
 var dataRequest = function(order){
   event.preventDefault();
+  //create new XMLHTTP Request
   var xhr = new XMLHttpRequest;
-
+  //Build a querystring based on which checkboxes are checked and which sort was clicked last
   var queryArray = [];
   var checkmarks = document.getElementsByClassName('checkmark');
   for ( var i = 0; i < checkmarks.length; i++){
@@ -19,7 +23,9 @@ var dataRequest = function(order){
     event.preventDefault();
     var results = JSON.parse(xhr.response);
     var listings = document.getElementsByClassName('listings')[0];
+    //clear all listings from the page
     listings.innerHTML = null;
+    //build new listings from the returned JSON data
     results.forEach(function(e,i){
       var a = document.createElement('a');
       var div = document.createElement('div');
@@ -40,44 +46,3 @@ var dataRequest = function(order){
   });
   xhr.send();
 }
-//
-// var priceFilter = function(item){
-//   if (item.price < 100000)
-//   return item;
-// }
-//
-// var filterIt = function(input){
-//   return input.filter(priceFilter);
-// }
-//
-// var sortLess = function(input){
-//   return input.sort(compareLess);
-// }
-//
-// var sortMore = function(input){
-//   return input.sort(compareMore);
-// }
-//
-// var compareMore = function(a,b){
-//   aPrice = a.price;
-//   bPrice = b.price;
-//   if (aPrice < bPrice){
-//     return 1;
-//   } else if (aPrice > bPrice){
-//     return -1;
-//   } else {
-//     return 0;
-//   }
-// }
-//
-// var compareLess = function(a,b){
-//   aPrice = a.price;
-//   bPrice = b.price;
-//   if (aPrice > bPrice){
-//     return 1;
-//   } else if (aPrice < bPrice){
-//     return -1;
-//   } else {
-//     return 0;
-//   }
-// }
