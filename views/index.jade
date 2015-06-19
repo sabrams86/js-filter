@@ -43,7 +43,7 @@ block content
         div.listings
           each listing in cabinList
             a(href='#' )
-              div.listing(name='#{listing.price}')
+              div.listing
                 img.thumbnail(src='#{listing.imgUrl}' alt='cabin')
                 p $#{listing.price}
               
