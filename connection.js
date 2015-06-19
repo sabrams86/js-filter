@@ -1,4 +1,3 @@
 var monk = require('monk');
-var db = monk('localhost:27017/cabins');
-
+var db = monk(process.env.MONGOLAB_URI || 'localhost/album_class_demo');
 module.exports = db;
