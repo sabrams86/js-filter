@@ -8,15 +8,16 @@ var dataRequest = function(order){
   //Build a querystring based on which checkboxes are checked and which sort was clicked last
   var queryArray = [];
   var checkmarks = document.getElementsByClassName('checkmark');
-  for ( var i = 0; i < checkmarks.length; i++){
-    if (checkmarks[i].checked === true){
-      queryArray.push(checkmarks[i].name+'=true');
-    }
-  }
+
+  var queryString = Array.prototype.filter.call(checkmarks, function(e){
+    return e.checked === true
+  }).map(function (checkmark) {
+    return checkmark.name+'=true';
+  }).join('&');
+
   if (order) {
-    queryArray.push('order='+order);
+    queryString = queryString.concat('&order='+order);
   }
-  var queryString = queryArray.join('&');
 
   xhr.open('get', '/cabins.json?'+queryString);
   xhr.addEventListener('load', function(){

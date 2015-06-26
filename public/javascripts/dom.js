@@ -1,10 +1,10 @@
 //Set Background Buttons
-var backgrounds = document.getElementsByClassName('background');
-for (var i = 0; i < backgrounds.length; i++){
-  backgrounds[i].addEventListener('click', function(){
-    document.body.style.backgroundImage = "url('/images/"+this.className.split(' ')[0]+".jpg')";
-  });
-}
+var changer = document.getElementsByClassName('background-changer')[0];
+changer.addEventListener('click', function(e){
+  if (e.target && e.target.nodeName == 'DIV'){
+    document.body.style.backgroundImage = "url('/images/"+e.target.className.split(' ')[0]+".jpg')";
+  }
+});
 
 //Set Sort Links
 var sortHigh = document.getElementsByClassName('high')[0];
@@ -22,9 +22,9 @@ sortLow.addEventListener('click', function(){
 });
 
 //Set checkbox listeners
-var checkmark = document.getElementsByClassName('checkmark');
-for(var i = 0; i<checkmark.length; i++){
-  checkmark[i].addEventListener('change', function(){
+var checklist = document.getElementsByClassName('price-list')[0];
+checklist.addEventListener('change', function(e){
+  if(e.target && e.target.nodeName == 'INPUT'){
     dataRequest(sortValue);
-  });
-}
+  }
+});
